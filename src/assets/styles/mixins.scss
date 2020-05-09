@@ -1,0 +1,11 @@
+/* MOBILE */
+@mixin mq-small-only {
+	@media only screen and (max-width: 768px) {
+		@content;
+	}
+}
+@mixin mq-tablet {
+	@media (min-width: 768px) and (max-width: 1023px){
+		@content;
+	}
+}
