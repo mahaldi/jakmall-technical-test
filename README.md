@@ -1,4 +1,4 @@
-# testing-vue
+# jakmall-technical-test
 
 ## Project setup
 ```
