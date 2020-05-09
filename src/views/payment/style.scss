@@ -1,0 +1,13 @@
+.payment{
+    $self: &;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: $primary;
+    &__box {
+        background-color: $white;
+        width: fit-content;
+        padding: 24px;
+        margin: auto auto;
+        box-shadow: 2px 10px 20px 0px $secondaryOpt10;
+    }
+}
