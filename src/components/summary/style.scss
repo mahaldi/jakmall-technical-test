@@ -1,0 +1,45 @@
+.summary {
+    $self: &;
+    width: 300px;
+    &__divider {
+        width: 80px;
+        height: 1px;
+        background-color: $grey;
+        margin-bottom: 14px;
+        margin-top: 30px;
+    }
+    &__bottom {
+        margin-top: 109px;
+    }
+    &__item {
+        display: flex;
+        margin-bottom: 15px;
+        &:nth-last-child(1){
+            margin-bottom: 0;
+        }
+    }
+    &__item-name, &__item-cost {
+        width: 50%;
+    }
+    &__item-cost {
+        text-align: right;
+    }
+    &__total {
+        display: flex;
+        margin-top: 16.5px;
+    }
+    &__total-text, &__total-cost {
+        width: 50%;
+    }
+    &__total-cost {
+        text-align: right;
+    }
+    &__button {
+        height: 60px;
+        color: $white;
+        background-color: $secondary;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+    }
+}
