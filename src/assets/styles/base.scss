@@ -3,19 +3,31 @@
 	font-size: 24px;
 	font-weight: bold;
 	color: $secondary;
+	font-family: 'Montserrat', sans-serif;
+	margin-bottom: 16.5px;
 	&--large{
 			font-size: 36px;
 	}
+	&--mgb-23{
+		margin-bottom: 23px;
+}
 }
 .jakmall-text {
 	$self: &;
 	font-size: 14px;
 	color: $black;
-	font-weight: normal;
+	font-weight: 400;
 	margin-bottom: 10px;
+	font-family: 'Inter', sans-serif;
 	//weight
 	&--bold {
-			font-weight: bold;
+		font-weight: bold;
+	}
+	&--ft-24 {
+		font-size: 24px;
+	}
+	&--medium {
+		font-weight: 500;
 	}
 	//
 	//font-size
@@ -26,11 +38,6 @@
 	//color
 	&--success {
 			color: $success;
-	}
-	//
-	//typeface
-	&--inter-ui {
-			font-family: 'Inter', sans-serif;
 	}
 	//
 	// opacity
