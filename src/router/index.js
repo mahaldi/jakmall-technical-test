@@ -1,22 +1,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Payment from '../views/payment'
 
 Vue.use(VueRouter)
 
   const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    beforeEnter: (to, from, next) => {
+      if(to.path === '/'){
+        next({ name: 'Payment' })
+      }
+    }
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/payment',
+    name: 'Payment',
+    component: Payment
   }
 ]
 
@@ -24,5 +24,5 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
-
+// router.replace({ path: '/payment?step=1', redirect: '/payment' })
 export default router
