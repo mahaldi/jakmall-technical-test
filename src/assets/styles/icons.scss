@@ -1,0 +1,62 @@
+//////// Font Icons ///////////////////////////////////////////////////////////////////////
+
+/*
+Fonts Icon Generator How To (Manualy)
+--
+Put the icon files that using SVG file's type into /resources/assets/scss/fonts/bsfonticons/svg/
+and make sure this SVG file's name is URL decoded, and not begin with "icon" word
+for example "love-outline" or "love-filled". Then upload all icon files into fontello.com
+It will generate all icon files become font, download it.
+Replace font files (woff,ttf,eot,svg) from downloaded file into into /resources/assets/scss/fonts/bsfonticons/
+And final step is copy paste the fontello codes
+*/
+
+// PUT THIS LINES BELOW TO YOUR _fonts.scss
+
+@font-face {
+    font-family: 'fontello';
+    src: url("~@/assets/icons/font/fontello.woff2") format('woff2'),
+          url("~@/assets/icons/font/fontello.woff") format('woff'),
+          url("~@/assets/icons/font/fontello.ttf") format('truetype');
+  }
+    
+  [class^="icon-"]:before, [class*=" icon-"]::before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+  }
+    /* select class begin with icon- and end with -filled or -outline */
+  [class^="icon-"], [class*=" icon-"] {
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+  
+      display: inline-block;
+      text-decoration: inherit;
+      // width: 1em;
+      // margin-right: .2em;
+      text-align: center;
+      /* opacity: .8; */
+  
+      /* For safety - reset parent styles, that can break glyph codes*/
+      font-variant: normal;
+      text-transform: none;
+  
+      line-height: 1;
+      vertical-align: baseline;
+      /* Animation center compensation - margins should be symmetric */
+      /* remove if not needed */
+      // margin-left: .2em;
+  
+      /* you can be more comfortable with increased icons size */
+      /* font-size: 120%; */
+  
+      /* Font smoothing. That was taken from TWBS */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+  
+      /* Uncomment for 3D effect */
+      /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  }
+@import './codes.scss';
+  
