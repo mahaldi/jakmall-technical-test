@@ -23,30 +23,39 @@
 	&--bold {
 		font-weight: bold;
 	}
-	&--ft-24 {
-		font-size: 24px;
-	}
 	&--medium {
 		font-weight: 500;
 	}
 	//
 	//font-size
 	&--ft16 {
-			font-size: 16px;
+		font-size: 16px;
+	}
+	&--ft-24 {
+		font-size: 24px;
 	}
 	//
 	//color
 	&--success {
-			color: $success;
+		color: $success;
+	}
+	&--secondary {
+		color: $secondary;
+	}
+	&--white {
+		color: $white;
 	}
 	//
 	// opacity
 	&--opt6 {
-			opacity: 0.6;
+		opacity: 0.6;
 	}
 	//
 	// margin bottom
 	&--mgb-2{
-			margin-bottom: 2px;
+		margin-bottom: 2px;
+	}
+	&--mg0 {
+		margin: 0;
 	}
 }
