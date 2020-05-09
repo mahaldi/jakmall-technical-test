@@ -1,0 +1,30 @@
+.stepper{
+	$self: &;
+	display: flex;
+	padding: 29px 37px;
+	background-color: $primary;
+	border-radius: 50px;
+	&__step {
+		margin-right: 67px;
+		display: flex;
+		&:nth-last-child(1) {
+			margin-right: 0;
+		}
+	}
+	&__rounded {
+		width: 30px;
+		height: 30px;
+		border-radius: 100%;
+		background-color: $secondaryOpt20;
+		text-align: center;
+		line-height: 30px;
+		&--active {
+			background-color: $secondary;
+			color: $white;
+		}
+	}
+	&__text {
+		margin-left: 11px;
+		line-height: 30px;
+	}
+}
