@@ -8,7 +8,7 @@
       <input
         :id="id"
         :type="type"
-        :value="valueInput"
+        :value="value"
         ref="input"
 				class="jakmall-input__element"
         :name="name"
