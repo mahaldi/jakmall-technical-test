@@ -41,10 +41,13 @@ export default {
     this.initEventChild();
   },
   watch: {
-    rules() {
-      if (this.validateOnRuleChange) {
-        this.validate(() => {});
-      }
+    rules: {
+      handler(){
+        if (this.validateOnRuleChange) {
+          this.validate(() => {});
+        }
+      },
+      deep: true
     }
   },
   methods: {
@@ -68,7 +71,7 @@ export default {
         console.warn("[Form] model is required for validate to work!");
         return;
       }
-
+      console.log('masuk')
       let promise;
       if (typeof callback !== "function" && window.Promise) {
         promise = new window.Promise((resolve, reject) => {
