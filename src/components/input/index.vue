@@ -1,10 +1,7 @@
 <template>
   <div class="jakmall-input">
     <div class="jakmall-input__formfield" 
-			:class="[
-				{ 'forceActive': disabled && valueInput},
-				`jakmall-input--${formItem.validateState}`
-			]">
+			:class=" !disabled ? `jakmall-input--${formItem.validateState}` : '' ">
       <input
         :id="id"
         :type="type"
