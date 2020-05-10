@@ -11,6 +11,9 @@
 					<FormItem prop="phone">
 						<Input id="phone" label="Phone Number" v-model="model.phone"/>
 					</FormItem>
+					<FormItem prop="address">
+						<TextArea id="address" label="Delivery Address" v-model="model.address"/>
+					</FormItem>
 				</Form>
 			</div>
 		</div>
@@ -24,8 +27,8 @@
 					<FormItem prop="dropshipName">
 						<Input id="dropshipName" label="Dropshipper Name" v-model="modelDropShip.dropshipName" :disabled="!isDropship"/>
 					</FormItem>
-					<FormItem prop="dropShipPhone">
-						<Input id="dropShipPhone" label="Dropshipper Phone Number" v-model="modelDropShip.dropShipPhone" :disabled="!isDropship"/>
+					<FormItem prop="dropshipPhone">
+						<Input id="dropShipPhone" label="Dropshipper Phone Number" v-model="modelDropShip.dropshipPhone" :disabled="!isDropship"/>
 					</FormItem>
 				</Form>
 			</div>
@@ -39,6 +42,7 @@ import FormItem from '@/components/forms/form-item'
 import Input from '@/components/input'
 import HeadingForm from '@/components/forms/heading-form'
 import CheckBox from '@/components/checkbox'
+import TextArea from '@/components/text-area'
 
 export default {
 	data() {
@@ -47,11 +51,12 @@ export default {
 			isDropship: false,
 			model: {
 				email: '',
-				phone: ''
+				phone: '',
+				address: ''
 			},
 			modelDropShip: {
 				dropshipName: '',
-				dropShipPhone: ''
+				dropshipPhone: ''
 			},
 			rulesDropShip: {
 				dropshipName: [
@@ -69,9 +74,13 @@ export default {
 					{ type: 'email', trigger: 'change' }
 				],
 				phone: [
-					{ required: true, trigger: 'change' },
+					{ required: false, trigger: 'change' },
 					{ pattern : PhoneRegex, trigger: 'change'},
 					{ min: 6, max: 20, trigger: 'change'}
+				],
+				address: [
+					{ required: true, trigger: 'change' },
+					{ max: 120, trigger: 'change'}
 				]
 			}
 		}
@@ -81,6 +90,7 @@ export default {
 			this.modelDropShip.dropshipName = ''
 			this.modelDropShip.dropShipPhone = ''
 			this.rulesDropShip.dropshipName[0].required = val
+			this.rulesDropShip.dropshipPhone[0].required = val
 		}
 	},
 	components: {
@@ -88,7 +98,8 @@ export default {
 		FormItem,
 		Input,
 		HeadingForm,
-		CheckBox
+		CheckBox,
+		TextArea
 	}
 }
 </script>
