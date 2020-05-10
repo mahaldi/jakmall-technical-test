@@ -1,0 +1,22 @@
+.delivery-details {
+	$self: &;
+	display: flex;
+	&__left {
+		width: 400px;
+		margin-right: 30px;
+	}
+	&__right {
+		width: 300px;
+		margin-top: 14px;
+	}
+	&__checkbox {
+		text-align: right;
+		margin-bottom: 16.5px;
+	}
+	&__form-left {
+
+	}
+	&__form-right {
+
+	}
+}
