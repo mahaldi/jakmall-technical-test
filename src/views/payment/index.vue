@@ -6,11 +6,12 @@
 			</div>
 			<div class="payment__form-section">
 				<div class="payment__back">
-          <i class="icon-left"></i>
-          <p>Back to cart</p>
+          <i class="payment__back-icon icon-left"></i>
+          <p class="jakmall-text jakmall-text--medium jakmall-text--blackOpt60">Back to cart</p>
         </div>
         <DeliveryDetails />
 			</div>
+      <div class="payment__divider"></div>
 			<div class="payment__summary-section">
 				<PaymentSummary />
 			</div>
