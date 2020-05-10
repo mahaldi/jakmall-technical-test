@@ -3,12 +3,39 @@
     min-width: 100vw;
     min-height: 100vh;
     background-color: $primary;
+    &__stepper-section {
+        width: fit-content;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
     &__box {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
         background-color: $white;
         width: fit-content;
         padding: 24px;
+        padding-left: 50px;
+        padding-top: 52px;
         margin: auto auto;
-        min-width: 500px;
+        min-width: 1100px;
+        height: 550px;
         box-shadow: 2px 10px 20px 0px $secondaryOpt10;
+    }
+    &__form-section {
+        width: 100%;
+    }
+    &__back {
+        display: flex;
+        cursor: pointer;
+    }
+    &__summary-section {
+        margin-left: auto;
     }
 }

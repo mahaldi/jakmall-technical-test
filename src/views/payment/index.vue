@@ -1,20 +1,33 @@
 <template>
   <div class="payment">
     <div class="payment__box">
-      <Stepper />
-      <PaymentSummary />
+			<div class="payment__stepper-section">
+				<Stepper />
+			</div>
+			<div class="payment__form-section">
+				<div class="payment__back">
+          <i class="icon-left"></i>
+          <p>Back to cart</p>
+        </div>
+        <DeliveryDetails />
+			</div>
+			<div class="payment__summary-section">
+				<PaymentSummary />
+			</div>
     </div>
   </div>
 </template>
 <script>
 import PaymentSummary from "@/components/summary";
 import Stepper from "@/components/stepper";
+import DeliveryDetails from '@/components/forms/delivery-details'
 
 export default {
   name: "Payment",
   components: {
     PaymentSummary,
-    Stepper
+    Stepper,
+    DeliveryDetails
   }
   // created(){
   //     if(isNaN(parseInt(this.$route.query.step))){
