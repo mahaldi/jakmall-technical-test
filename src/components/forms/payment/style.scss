@@ -36,7 +36,9 @@
 
 	}
 	&__icon {
+		display: none;
 		position: absolute;
+		top: 0;
 		right: 12px;
 		line-height: 60px;
 		font-size: 14px;
@@ -45,6 +47,7 @@
 .category-button__icon {
 	$self: &;
 	&--active {
+		display: block;
 		color: $success;
 	}
 }

@@ -8,7 +8,7 @@
 				:class="{'jakmall-text--bluis-black' : isActive}"> {{ secondText }} 
 			</p>
 		</div>
-		<i class="category-button__icon icon-oke" :class="{'category-button__icon--active' : isActive}"></i>
+		<i class="category-button__icon icon-ok" :class="{'category-button__icon--active' : isActive}"></i>
 	</div>
 </template>
 <script>
@@ -29,3 +29,4 @@ export default {
 	}
 }
 </script>
+<style lang="scss" src="./style.scss" scoped />
