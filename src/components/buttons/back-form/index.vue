@@ -1,5 +1,5 @@
 <template>
-  <div class="payment-back" @click="$emit=('click')">
+  <div class="payment-back" @click="$emit('click')">
     <i class="payment-back__icon icon-left"></i>
     <p class="jakmall-text jakmall-text--medium jakmall-text--blackOpt60"> {{ text }} </p>
   </div>
@@ -8,7 +8,8 @@
 export default {
 	props: {
 		text: {
-			default: 'Back to cart'
+			default: '',
+			type: String
 		}
 	}
 }
