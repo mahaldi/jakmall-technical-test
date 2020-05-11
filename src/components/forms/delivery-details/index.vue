@@ -23,7 +23,7 @@
 				<CheckBox v-model="isDropship" label="Send as Dropshipper" />
 			</div>
 			<div class="delivery-details__form-right">
-				<Form :model="modelDropShip" :rules="rulesDropShip">
+				<Form ref="dropship" :model="modelDropShip" :rules="rulesDropShip">
 					<FormItem prop="dropshipName">
 						<Input id="dropshipName" label="Dropshipper Name" v-model="modelDropShip.dropshipName" :disabled="!isDropship"/>
 					</FormItem>
@@ -43,20 +43,27 @@ import Input from '@/components/input'
 import HeadingForm from '@/components/forms/heading-form'
 import CheckBox from '@/components/checkbox'
 import TextArea from '@/components/text-area'
+import Cookies from 'js-cookie'
 
 export default {
 	data() {
+		let cookies = Cookies.get('payment')
+
+		let payload = JSON.parse(cookies).form1 ? JSON.parse(cookies).form1 : {}
+		let { email, address, phone, dropshipName, dropshipPhone } = payload.payload || {}
 		let PhoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-/,/0-9]*$/g
+
 		return {
-			isDropship: false,
+			isDropship: dropshipName !== undefined ,
+			payload,
 			model: {
-				email: '',
-				phone: '',
-				address: ''
+				email,
+				phone,
+				address
 			},
 			modelDropShip: {
-				dropshipName: '',
-				dropshipPhone: ''
+				dropshipName,
+				dropshipPhone
 			},
 			rulesDropShip: {
 				dropshipName: [
@@ -100,6 +107,45 @@ export default {
 		HeadingForm,
 		CheckBox,
 		TextArea
+	},
+	methods: {
+		dispatchForm() {
+			let payload = {
+				email: this.model.email,
+				phone: this.model.phone,
+				address: this.model.address,
+				dropshipName: this.modelDropShip.dropshipName,
+				dropshipPhone: this.modelDropShip.dropshipPhone
+			}
+			this.$store.dispatch('payment/setFirstForm', payload)
+			let payment = JSON.parse(Cookies.get('payment'))
+			payment.form1 = {
+				payload
+			}
+			Cookies.set('payment', payment)
+		},
+		validate() {
+			let form1, form2
+
+			this.$refs.form.validate((valid) => {
+				form1 = valid
+				return valid
+			});
+			this.$refs.dropship.validate((valid) => {
+				form2 = valid
+				return valid
+			});
+			return form1 && form2
+		},
+		onSubmit() {
+			this.dispatchForm()
+			return this.validate()
+		}
+	},
+	mounted() {
+		if(this.payload.payload){
+			this.validate()
+		}
 	}
 }
 </script>

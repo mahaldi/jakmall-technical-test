@@ -22,11 +22,23 @@
         <span class="summary__total-text heading">Total</span>
         <span class="summary__total-cost heading">505,900</span>
       </div>
-      <button class="summary__button" @click="$emit('submit')">Continue to Payment</button>
+      <button class="summary__button" @click="$emit('submit')">{{ confirmBtnText }}</button>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: {
+    confirmBtnText: {
+      default: 'Continue to Payment'
+    },
+    selectedShipment: {
+      type: Object
+    },
+    selectedPayment: {
+      type: Object
+    }
+  }
+};
 </script>
 <style lang="scss" src="./style.scss" scoped />

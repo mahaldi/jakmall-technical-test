@@ -2,16 +2,22 @@
   <div class="payment">
     <div class="payment__box">
 			<div class="payment__stepper-section">
-				<Stepper :step="step" />
+				<Stepper :step="currentStep" />
 			</div>
 			<div class="payment__form-section">
-        <BackFormButton @click="step -= 1" :text="backBtnText"/>
-        <DeliveryDetails v-show="step === 1"/>
-        <PaymentForm v-show="step === 2"/>
+        <BackFormButton @click="dispatchStep('prev')" :text="backBtnText"/>
+        <DeliveryDetails v-if="currentStep === 1" ref="form1"/>
+        <PaymentForm v-else-if="currentStep === 2" ref="form2" 
+          :selectedShipment="selectedShipment" 
+          :selectedPayment="selectedPayment"/>
+        <FormFinish v-else-if="currentStep === 3"/>
 			</div>
       <div class="payment__divider"></div>
 			<div class="payment__summary-section">
-				<PaymentSummary @submit="onSubmit"/>
+				<PaymentSummary @submit="onSubmit" 
+          :selectedShipment="selectedShipment"
+          :selectedPayment="selectedPayment"
+          :confirmBtnText="currentStep === 1 ? 'Continue to Payment': `Pay with ${selectedPayment.firstText}`"/>
 			</div>
     </div>
   </div>
@@ -22,6 +28,7 @@ import Stepper from "@/components/stepper";
 import DeliveryDetails from '@/components/forms/delivery-details'
 import PaymentForm from '@/components/forms/payment'
 import BackFormButton from '@/components/buttons/back-form'
+import FormFinish from '@/components/forms/finish'
 
 export default {
   name: "Payment",
@@ -30,26 +37,65 @@ export default {
     Stepper,
     DeliveryDetails,
     PaymentForm,
-    BackFormButton
+    BackFormButton,
+    FormFinish
   },
   data() {
     return {
-      step: 1,
       backBtnText: 'Back to cart'
     }
   },
   watch: {
-    step(val) {
+    currentStep(val) {
       let defaultText = 'Back to cart'
       val === 2 ? this.backBtnText = 'Back to delivery' : 
       val === 3 ? this.backBtnText = 'Go to homepage' : 
       this.backBtnText = defaultText
     }
   },
-  methods: {
-    onSubmit() {
-      this.step += 1
+  computed: {
+    currentDetail() {
+      return this.$store.state.payment.currentDetail
+    },
+    selectedShipment() {
+      return this.$store.state.payment.selectedShipment
+    },
+    selectedPayment() {
+      return this.$store.state.payment.selectedPayment
+    },
+    currentStep() {
+      return this.$store.state.payment.step
     }
+  },
+  methods: {
+    dispatchStep(direction) {
+      let step = this.currentStep
+      direction === 'next' ? step += 1 : step -= 1
+      this.$store.dispatch('payment/setStep', step )
+      this.replaceQuery(step)
+    },
+    replaceQuery(step) {
+      this.$router.replace({ query: {...this.$route.query, step }}).catch(() => {})
+    },
+    onSubmit() {
+      let isValid = this.$refs[`form${this.currentStep}`].onSubmit()
+
+      if(isValid) {
+        this.dispatchStep('next')
+        this.replaceQuery(this.currentStep)
+      }
+    }
+  },
+  beforeMount() {
+    let step = parseInt(this.$route.query.step)
+    this.$store.dispatch('payment/fetchCurrentDetail')
+    this.$store.dispatch('payment/setStep', step)
+    this.replaceQuery(step)
+  },
+  mounted() {
+    let { id } = this.$route.params
+    if(id)
+      return this.$store.dispatch('payment/fetchDetails', id)
   }
 };
 </script>
