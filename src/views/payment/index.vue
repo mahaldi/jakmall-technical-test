@@ -46,20 +46,10 @@ export default {
       this.backBtnText = defaultText
     }
   },
-  // computed: {
-  //   backBtnText() {
-  //     let defaultText = 'Back to cart'
-  //     return this.step == 2 ? 'Back to delivery' : this.step === 3 ? 'Go to homepage' : defaultText
-  //   }
-  // },
   methods: {
     onSubmit() {
       this.step += 1
-    },
-    // backBtnText() {
-    //   let defaultText = 'Back to cart'
-    //   return this.step == 2 ? 'Back to delivery' : this.step === 3 ? 'Go to homepage' : defaultText
-    // }
+    }
   }
 };
 </script>
