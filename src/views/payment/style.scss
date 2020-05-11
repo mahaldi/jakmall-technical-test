@@ -2,6 +2,7 @@
     $self: &;
     min-width: 100vw;
     min-height: 100vh;
+    padding-top: 55px;
     background-color: $primary;
     &__stepper-section {
         width: fit-content;
@@ -12,11 +13,6 @@
         margin: auto;
     }
     &__box {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
         display: flex;
         background-color: $white;
         width: fit-content;
