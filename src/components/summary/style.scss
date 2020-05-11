@@ -35,6 +35,8 @@
         text-align: right;
     }
     &__button {
+        outline: none;
+        cursor: pointer;
         height: 60px;
         color: $white;
         background-color: $secondary;
