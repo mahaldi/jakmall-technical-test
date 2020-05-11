@@ -1,0 +1,50 @@
+.payment-form {
+	$self: &;
+
+	&__category {
+		margin-bottom: 68px;
+		&:nth-last-child(1) {
+			margin-bottom: 0;
+		}
+	}
+	&__category-items {
+		display: flex;
+	}
+	&__category-item {
+		margin-right: 10px;
+		&:nth-last-child(1) {
+			margin-right: 0;
+		}
+	}
+}
+
+.category-button{
+	cursor: pointer;
+	$self: &;
+	min-width: 180px;
+	height: 60px;
+	padding: 14px;
+	border: 1px solid $light-grey;
+	background-color: $white;
+	position: relative;
+	&--active {
+		border-color: $success;
+		background-color: $successOpt10;
+		border-width: 2px;
+	}
+	&__content {
+
+	}
+	&__icon {
+		position: absolute;
+		right: 12px;
+		line-height: 60px;
+		font-size: 14px;
+	}
+}
+.category-button__icon {
+	$self: &;
+	&--active {
+		color: $success;
+	}
+}
