@@ -28,6 +28,9 @@
 	}
 	//
 	//font-size
+	&--ft13 {
+		font-size: 13px;
+	}
 	&--ft16 {
 		font-size: 16px;
 	}
@@ -48,8 +51,14 @@
 	&--bluis-blackOpt80 {
 		color: $bluis-blackOpt80;
 	}
+	&--bluis-blackOpt60 {
+		color: $bluis-blackOpt60;
+	}
 	&--blackOpt60 {
 		color: $blackOpt60;
+	}
+	&--bluis-black {
+		color: $bluis-black;
 	}
 	//
 	// opacity
@@ -60,6 +69,9 @@
 	// margin bottom
 	&--mgb-2{
 		margin-bottom: 2px;
+	}
+	&--mgb-5 {
+		margin-bottom: 5px;
 	}
 	&--mg0 {
 		margin: 0;
