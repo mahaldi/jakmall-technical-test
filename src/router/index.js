@@ -8,8 +8,9 @@ Vue.use(VueRouter)
   {
     path: '/',
     beforeEnter: (to, from, next) => {
-      if(to.path === '/'){
-        next({ name: 'Payment' })
+      console.log(to,'to')
+      if(to.path === '/' || !to.query.step){
+        next({ path:'/payment?step=1'  })
       }
     }
   },
@@ -24,5 +25,4 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
-// router.replace({ path: '/payment?step=1', redirect: '/payment' })
 export default router
