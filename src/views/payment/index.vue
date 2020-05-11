@@ -2,7 +2,7 @@
   <div class="payment">
     <div class="payment__box">
 			<div class="payment__stepper-section">
-				<Stepper />
+				<Stepper :step="step"/>
 			</div>
 			<div class="payment__form-section">
 				<div class="payment__back" @click="step -= 1">
