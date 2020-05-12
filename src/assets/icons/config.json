@@ -25,60 +25,10 @@
       "src": "mfglabs"
     },
     {
-      "uid": "d9fe1b6a6bb46448b08662fa057282ce",
-      "css": "arrow_back",
-      "code": 59392,
-      "src": "custom_icons",
-      "selected": false,
-      "svg": {
-        "path": "M0 0H1000V1000H0ZM833.3 458.3H326.3L559.2 225.4 500 166.7 166.7 500 500 833.3 558.8 774.6 326.3 541.7H833.3V458.3Z",
-        "width": 1000
-      },
-      "search": [
-        "arrow_back"
-      ]
-    },
-    {
-      "uid": "7ac405b703a2c0529f9d7671b5187eb9",
-      "css": "check",
-      "code": 59393,
-      "src": "custom_icons",
-      "selected": false,
-      "svg": {
-        "path": "M0 0H1333.3V1333.3H0ZM500 898.3L268.3 666.7 189.4 745 500 1055.6 1166.7 388.9 1088.3 310.6Z",
-        "width": 1000
-      },
-      "search": [
-        "check"
-      ]
-    },
-    {
-      "uid": "777b883a99785cc8c13e6023ac421acf",
-      "css": "close",
-      "code": 59394,
-      "src": "custom_icons",
-      "selected": false,
-      "svg": {
-        "path": "M1055.6 356.1L977.2 277.8 666.7 588.3 356.1 277.8 277.8 356.1 588.3 666.7 277.8 977.2 356.1 1055.6 666.7 745 977.2 1055.6 1055.6 977.2 745 666.7ZM0 0H1333.3V1333.3H0Z",
-        "width": 1000
-      },
-      "search": [
-        "close"
-      ]
-    },
-    {
-      "uid": "a43432418bd46fb3faf07dd1fdeea668",
-      "css": "arrow_back-white-18dp",
-      "code": 59395,
-      "src": "custom_icons",
-      "selected": false,
-      "svg": {
-        "path": "M0 0H1333.3V1333.3H0ZM1111.1 611.1H435L745.6 300.6 666.7 222.2 222.2 666.7 666.7 1111.1 745 1032.8 435 722.2H1111.1V611.1Z",
-        "width": 1000
-      },
-      "search": [
-        "arrow_back-white-18dp"
-      ]
+      "uid": "37910a1398001a5ccb541cb2a253a2c7",
+      "css": "right-open",
+      "code": 61446,
+      "src": "mfglabs"
     }
   ]
 }
