@@ -7,7 +7,12 @@ const state = {
 	currentDetail: {},
 	selectedShipment: {},
 	selectedPayment: {},
-	firstForm: {}
+	firstForm: {},
+	wallet: 1500000,
+	item: {
+		qty: 10,
+		total: 500000
+	}
 }
 
 // Getter functions
@@ -39,6 +44,12 @@ const actions = {
 		}
 		
 	},
+	fetchItem({commit}){
+		let cookie = Cookies.get('item')
+		if(!cookie) Cookies.set('item', {qty: 10, total: 500000}, { expires: 1 })
+		let total = JSON.parse(Cookies.get('item'))
+		commit('SET_ITEM', total)
+	},
 	setSelectedShipment({commit}, data) {
 		commit('SET_SELECTED_SHIPMENT', data)
 	},
@@ -53,10 +64,16 @@ const actions = {
 	},
 	setCurrentDetail({commit}, data) {
 		commit('SET_CURRENTDETAIL', data)
+	},
+	setItem({commit}, data) {
+		commit('SET_ITEM', data)
 	}
 }
 // Mutations
 const mutations = {
+	SET_ITEM(state, data) {
+		state.item = data
+	},
 	SET_FIRST_FORM(state, data) {
 		state.firstForm = data
 	},

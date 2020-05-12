@@ -14,7 +14,7 @@
 			<HeadingForm heading="Payment"/>
 			<div class="payment-form__category-items">
 				<div v-for=" (item,idx) in payments"  class="payment-form__category-item" :key="idx">
-					<CategoryButton @click="dispatchPayment(item)" :isActive="item.id === payment" :firstText="item.firstText" :secondText="item.secondText"/>
+					<CategoryButton @click="dispatchPayment(item)" :isDisabled="wallet < total && item.id === 0" :isActive="item.id === payment" :firstText="item.firstText" :secondText="item.secondText"/>
 				</div>
 			</div>
 		</div>
@@ -22,10 +22,9 @@
 	</div>
 </template>
 <script>
-import HeadingForm from '@/components/forms/heading-form'
-import CategoryButton from '@/components/forms/payment/category-button'
 import Cookies from 'js-cookie'
-
+const HeadingForm = () => import('@/components/forms/heading-form')
+const CategoryButton = () => import('@/components/forms/payment/category-button')
 export default {
 	props: {
 		currentDetail: {
@@ -53,6 +52,14 @@ export default {
 		HeadingForm,
 		CategoryButton
 	},
+	computed: {
+		wallet() {
+			return this.$store.state.payment.wallet
+		},
+		total() {
+			return this.$store.state.payment.item.total
+		}
+	},
 	methods: {
 		detailSelected(val , id) {
 			for(let i = 0; i < this[val].length ;i++){
@@ -71,20 +78,20 @@ export default {
 			this.$store.dispatch('payment/setCurrentDetail', payment)
 		},
 		onSubmit() {
-			return {
-				isValid : true
-			}
+			return this.payment === 0 && this.wallet < this.total ? false : true
 		},
 		async dispatchShipment(val) {
 			this.shipment = val.id
 			this.setCookies()
 		},
 		async dispatchPayment(val) {
+			if(val.id === 0 && this.wallet < this.total) return
 			this.payment = val.id
 			this.setCookies()
 		}
 	},
 	mounted() {
+		console.log(this.payment === 0 && this.wallet < this.total ? false : true)
 		if( this.currentDetail.shipment ) {
 			this.shipment = this.currentDetail.shipment.id
 			this.payment = this.currentDetail.payment.id

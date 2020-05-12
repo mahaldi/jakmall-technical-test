@@ -2,7 +2,7 @@
   <div class="summary">
     <div class="summary__top">
       <p class="heading">Summary</p>
-      <p class="jakmall-text jakmall-text--opt6">10 items purchased</p>
+      <p class="jakmall-text jakmall-text--opt6">{{ qty }} items purchased</p>
     </div>
 
 		<div class="summary__middle" v-if="shipment.days">
@@ -22,7 +22,7 @@
           <span class="jakmall-text">Cost of goods</span>
         </div>
         <div class="summary__item-cost">
-          <span class="jakmall-text jakmall-text--bold">{{ productCost }}</span>
+          <span class="jakmall-text jakmall-text--bold">{{ wordSplitter(productCost) }}</span>
         </div>
       </div>
       <div class="summary__item" v-if="dropShip">
@@ -30,7 +30,7 @@
           <span class="jakmall-text">Dropshipping fee</span>
         </div>
         <div class="summary__item-cost">
-          <span class="jakmall-text jakmall-text--bold">{{ dropShipCost }}</span>
+          <span class="jakmall-text jakmall-text--bold">{{ wordSplitter(dropShipCost) }}</span>
         </div>
       </div>
       <div class="summary__item" v-if="shipment.courier">
@@ -38,19 +38,21 @@
           <span class="jakmall-text"> <span class="jakmall-text jakmall-text--bold">{{ shipment.courier }}</span> shipment</span>
         </div>
         <div class="summary__item-cost">
-          <span class="jakmall-text jakmall-text--bold"> {{ shipment.cost }} </span>
+          <span class="jakmall-text jakmall-text--bold"> {{ wordSplitter(shipment.cost) }} </span>
         </div>
       </div>
       <div class="summary__total">
         <span class="summary__total-text heading">Total</span>
-        <span class="summary__total-cost heading">{{ total }}</span>
+        <span class="summary__total-cost heading">{{ wordSplitter(total) }}</span>
       </div>
       <ConfirmButton v-if="currentStep < 3"  @click="$emit('submit')" :label="confirmBtnText"/>
     </div>
   </div>
 </template>
 <script>
-import ConfirmButton from '@/components/buttons/confirm-form'
+// import ConfirmButton from '@/components/buttons/confirm-form'
+const ConfirmButton = () => import('@/components/buttons/confirm-form')
+import { wordSplitter } from '@/utils/helper'
 
 export default {
   components: {
@@ -71,9 +73,6 @@ export default {
     },
     currentStep: {
       type: Number
-    },
-    productCost: {
-      default:  500000
     }
   },
   computed: {
@@ -85,6 +84,17 @@ export default {
     },
     total() {
       return this.shipmentCost + this.productCost + this.dropShipCost
+    },
+    productCost() {
+      return this.$store.state.payment.item.total
+    },
+    qty() {
+      return this.$store.state.payment.item.qty
+    }
+  },
+  methods: {
+    wordSplitter(value) {
+      return wordSplitter(value, ',', 3)
     }
   }
 };

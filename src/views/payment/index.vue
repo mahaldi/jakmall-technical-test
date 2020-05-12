@@ -85,9 +85,6 @@ export default {
     dropShip(){
       return this.currentDetail && this.currentDetail.form1 && this.currentDetail.form1.isDropship || false
     },
-    selectedPayment() {
-      return this.$store.state.payment.selectedPayment
-    },
     currentStep() {
       return this.$store.state.payment.step
     }
@@ -114,7 +111,7 @@ export default {
     },
     onSubmit() {
       let isValid = this.$refs[`form${this.currentStep}`].onSubmit()
-
+      
       if(isValid) {
         this.dispatchStep('next')
         if( this.currentStep === 3 ) {
@@ -143,6 +140,7 @@ export default {
     }
     let step = parseInt(this.$route.query.step)
     this.$store.dispatch('payment/fetchCurrentDetail')
+    this.$store.dispatch('payment/fetchItem')
     if(step > 1 && !this.currentDetail.form2)
       return this.replaceQuery(1)
     this.$store.dispatch('payment/setStep', step)
