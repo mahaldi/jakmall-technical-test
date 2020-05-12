@@ -1,0 +1,64 @@
+.slide-btt-enter-active, .slide-btt-leave-active{
+    transition: transform $transition-duration ease-out;
+}
+.slide-btt-enter, .slide-btt-leave-to {
+    transform: translateY(100vh); //pas close
+}
+.slide-btt-enter-to, .slide-btt-leave {
+    transform: translateY(0); // pas enter
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity $transition-duration ease-in-out;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
+
+.jakmall-drawer{
+    $self: &;
+    position: fixed;
+    bottom: 0;
+    z-index: 2001;
+    width: fit-content;
+    height: fit-content;
+    &__header {
+        padding: 16px;
+        border-bottom: 1px solid $light-grey;
+        display: flex;
+        background-color: $white;
+        border-radius: 8px 8px 0 0;
+    }
+    &__title {
+        font-size: 16px;
+        letter-spacing: 0;
+        color: $black;
+        text-align: left;
+        font-weight: 500;
+    }
+    &__close-button {
+        cursor: pointer;
+        margin-left: auto;
+    }
+    &__container {
+        overflow: auto;
+        background-color: $white;
+        width: 100vw;
+        height: 100vh;
+    }
+    &.horizontal {
+        top: 0;
+        .jakmall-drawer__container{
+            min-height: 100vh;
+        }
+        .jakmall-drawer__header{
+            border-radius: 8px 0 0 0;
+        }
+    }
+    &.rtl{
+        right: 0;
+    }
+    &.ltr{
+        left: 0;
+    }
+}
