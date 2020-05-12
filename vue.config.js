@@ -1,4 +1,9 @@
 module.exports = {
+	pluginOptions: {
+		webpackBundleAnalyzer: {
+		  openAnalyzer: false
+		}
+	},
 	configureWebpack: {
 		optimization: {
 		  runtimeChunk: 'single',
