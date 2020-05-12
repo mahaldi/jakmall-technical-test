@@ -22,20 +22,21 @@
           :confirmBtnText="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
 			</div>
       <div class="payment__confirm-button is-medium">
-        <ConfirmButton @click="onSubmit" :label="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
+        <ConfirmButton @click="onSubmit" v-if="currentStep < 3" :label="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
+        <ConfirmButton @click="onSubmit" v-if="currentStep === 3" label="Check Summary"/>
       </div>
     </div>
   </div>
 </template>
 <script>
-import PaymentSummary from "@/components/summary";
-import Stepper from "@/components/stepper";
-import DeliveryDetails from '@/components/forms/delivery-details'
-import PaymentForm from '@/components/forms/payment'
-import BackFormButton from '@/components/buttons/back-form'
-import FormFinish from '@/components/forms/finish'
-import Cookies from 'js-cookie'
-import ConfirmButton from '@/components/buttons/confirm-form'
+const PaymentSummary = () => import('@/components/summary')
+const Stepper = () => import('@/components/stepper')
+const DeliveryDetails = () => import('@/components/forms/delivery-details')
+const PaymentForm = () => import('@/components/forms/payment')
+const BackFormButton = () => import('@/components/buttons/back-form')
+const FormFinish = () => import('@/components/forms/finish')
+const Cookies = () => import('js-cookie')
+const ConfirmButton = () => import('@/components/buttons/confirm-form')
 
 export default {
   name: "Payment",
