@@ -23,9 +23,17 @@
 			</div>
       <div class="payment__confirm-button is-medium">
         <ConfirmButton @click="onSubmit" v-if="currentStep < 3" :label="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
-        <ConfirmButton @click="onSubmit" v-if="currentStep === 3" label="Check Summary"/>
+        <ConfirmButton @click="summaryDrawer = true" v-if="currentStep === 3" label="Check Summary"/>
       </div>
     </div>
+    <Drawer :visible.sync="summaryDrawer" title="Summary" :size="450" sizeUnit="px">
+      <PaymentSummary 
+        :currentDetail="currentDetail"
+        :currentStep="currentStep"
+        :shipment="shipment"
+        :payment="payment"
+        :dropShip="dropShip"/>
+    </Drawer>
   </div>
 </template>
 <script>
@@ -35,12 +43,13 @@ const DeliveryDetails = () => import('@/components/forms/delivery-details')
 const PaymentForm = () => import('@/components/forms/payment')
 const BackFormButton = () => import('@/components/buttons/back-form')
 const FormFinish = () => import('@/components/forms/finish')
-const Cookies = () => import('js-cookie')
 const ConfirmButton = () => import('@/components/buttons/confirm-form')
-
+const Drawer = () => import('@/components/drawer')
+import Cookies from 'js-cookie'
 export default {
   name: "Payment",
   components: {
+    Drawer,
     PaymentSummary,
     Stepper,
     DeliveryDetails,
@@ -51,7 +60,8 @@ export default {
   },
   data() {
     return {
-      backBtnText: 'Back to cart'
+      backBtnText: 'Back to cart',
+      summaryDrawer: false
     }
   },
   watch: {
@@ -107,8 +117,8 @@ export default {
         this.dispatchStep('next')
         if( this.currentStep === 3 ) {
           let cookiePayments = Cookies.get('payments')
-          if( !cookiePayments ) Cookies.set('payments', [])
-          let dataPayments = JSON.parse(cookiePayments)
+          if( !cookiePayments ) Cookies.set('payments', [], { expires: 1 })
+          let dataPayments = JSON.parse(Cookies.get('payments'))
           let payload = this.currentDetail
           let orderId = this.generateOrderId()
           payload.id = orderId
