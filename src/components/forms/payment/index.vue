@@ -5,7 +5,7 @@
 			<HeadingForm heading="Shipment"/>
 			<div class="payment-form__category-items">
 				<div v-for=" (item,idx) in shipments" class="payment-form__category-item" :key="idx">
-					<CategoryButton @click="dispatchShipment(item)" :isActive="item.id === selectedShipment.id" :firstText="item.courier" :secondText="item.cost"/>
+					<CategoryButton @click="dispatchShipment(item)" :isActive="item.id === shipment" :firstText="item.courier" :secondText="item.cost"/>
 				</div>
 			</div>
 		</div>
@@ -14,7 +14,7 @@
 			<HeadingForm heading="Payment"/>
 			<div class="payment-form__category-items">
 				<div v-for=" (item,idx) in payments"  class="payment-form__category-item" :key="idx">
-					<CategoryButton @click="dispatchPayment(item)" :isActive="item.id === selectedPayment.id" :firstText="item.firstText" :secondText="item.secondText"/>
+					<CategoryButton @click="dispatchPayment(item)" :isActive="item.id === payment" :firstText="item.firstText" :secondText="item.secondText"/>
 				</div>
 			</div>
 		</div>
@@ -28,27 +28,25 @@ import Cookies from 'js-cookie'
 
 export default {
 	props: {
-		selectedPayment: {
-			type: Object
-		},
-		selectedShipment: {
+		currentDetail: {
 			type: Object
 		}
 	},
 	data() {
 		return {
 			shipments: [
-				{ id: 0, courier: 'GO-SEND', cost: '15,000', days: 'today' },
-				{ id: 1, courier: 'JNE', cost: '9,000', days: '2 days' },
-				{ id: 2, courier: 'Personal Courier', cost: '29,000', days: '1 day' }
+				{ id: 0, courier: 'GO-SEND', cost: 15000, days: 'today' },
+				{ id: 1, courier: 'JNE', cost: 9000, days: '2 days' },
+				{ id: 2, courier: 'Personal Courier', cost: 29000, days: '1 day' }
 			],
 
 			payments: [
-				{ id: 0, firstText: 'e-Wallet', secondText: '1,500,000 left' },
+				{ id: 0, firstText: 'e-Wallet', secondText: 1500000 },
 				{ id: 1, firstText: 'Bank Transfer', secondText: '' },
 				{ id: 2, firstText: 'Virtual Account', secondText: '' }
 			],
-
+			shipment: 0,
+			payment: 0
 		}
 	},
 	components: {
@@ -62,34 +60,38 @@ export default {
 					return this[val][i]
 			}
 		},
-		onSubmit() {
+		setCookies() {
 			let payload = {
-				shipment: this.selectedShipment,
-				payment: this.selectedPayment
+				shipment: this.detailSelected('shipments', this.shipment),
+				payment: this.detailSelected('payments', this.payment)
 			}
 			let payment = JSON.parse(Cookies.get('payment'))
-			payment.form2 = {
-				payload
-			}
+			payment.form2 = payload
 			Cookies.set('payment', payment)
+			this.$store.dispatch('payment/setCurrentDetail', payment)
+		},
+		onSubmit() {
 			return {
-				isValid : this.selectedPayment !== null && this.selectedShipment !== null
+				isValid : true
 			}
 		},
-		dispatchShipment(val) {
-			this.$store.dispatch('payment/setSelectedShipment', val)
+		async dispatchShipment(val) {
+			this.shipment = val.id
+			this.setCookies()
 		},
-		dispatchPayment(val) {
-			this.$store.dispatch('payment/setSelectedPayment', val)
+		async dispatchPayment(val) {
+			this.payment = val.id
+			this.setCookies()
 		}
 	},
 	mounted() {
-		let prefferedSelected = {
-			shipment: 0,
-			payment: 0
+		if( this.currentDetail.shipment ) {
+			this.shipment = this.currentDetail.shipment.id
+			this.payment = this.currentDetail.payment.id
+			this.setCookies()
+		}else {
+			this.setCookies()
 		}
-		this.dispatchShipment(this.shipments[prefferedSelected.shipment])
-		this.dispatchPayment(this.payments[prefferedSelected.payment])
 	}
 };
 </script>

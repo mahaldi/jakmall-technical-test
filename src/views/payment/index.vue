@@ -6,18 +6,20 @@
 			</div>
 			<div class="payment__form-section">
         <BackFormButton @click="dispatchStep('prev')" :text="backBtnText"/>
-        <DeliveryDetails v-if="currentStep === 1" ref="form1"/>
+        <DeliveryDetails v-if="currentStep === 1" ref="form1" :currentDetail="currentDetail && currentDetail.form1" />
         <PaymentForm v-else-if="currentStep === 2" ref="form2" 
-          :selectedShipment="selectedShipment" 
-          :selectedPayment="selectedPayment"/>
+          :currentDetail="currentDetail && currentDetail.form2 || {}"/>
         <FormFinish v-else-if="currentStep === 3"/>
 			</div>
       <div class="payment__divider"></div>
 			<div class="payment__summary-section">
 				<PaymentSummary @submit="onSubmit" 
-          :selectedShipment="selectedShipment"
-          :selectedPayment="selectedPayment"
-          :confirmBtnText="currentStep === 1 ? 'Continue to Payment': `Pay with ${selectedPayment.firstText}`"/>
+          :currentDetail="currentDetail"
+          :currentStep="currentStep"
+          :shipment="shipment"
+          :payment="payment"
+          :dropShip="dropShip"
+          :confirmBtnText="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
 			</div>
     </div>
   </div>
@@ -57,8 +59,14 @@ export default {
     currentDetail() {
       return this.$store.state.payment.currentDetail
     },
-    selectedShipment() {
-      return this.$store.state.payment.selectedShipment
+    shipment(){
+      return this.currentDetail && this.currentDetail.form2  && this.currentDetail.form2.shipment || {}
+    },
+    payment() {
+      return this.currentDetail && this.currentDetail.form2 && this.currentDetail.form2.payment || {}
+    },
+    dropShip(){
+      return this.currentDetail && this.currentDetail.form1 && this.currentDetail.form1.isDropship || false
     },
     selectedPayment() {
       return this.$store.state.payment.selectedPayment
@@ -89,8 +97,9 @@ export default {
   beforeMount() {
     let step = parseInt(this.$route.query.step)
     this.$store.dispatch('payment/fetchCurrentDetail')
+    if(step > 1 && !this.currentDetail.form2)
+      return this.replaceQuery(1)
     this.$store.dispatch('payment/setStep', step)
-    this.replaceQuery(step)
   },
   mounted() {
     let { id } = this.$route.params

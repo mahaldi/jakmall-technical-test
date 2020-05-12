@@ -23,8 +23,7 @@ export default {
 			type: String
 		},
 		secondText: {
-			default: '15,000',
-			type: String
+			default: '',
 		}
 	}
 }

@@ -43,6 +43,9 @@ const actions = {
 	},
 	setStep({commit}, data) {
 		commit('SET_STEP', data)
+	},
+	setCurrentDetail({commit}, data) {
+		commit('SET_CURRENTDETAIL', data)
 	}
 }
 // Mutations

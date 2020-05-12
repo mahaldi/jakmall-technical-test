@@ -23,12 +23,12 @@
 				<CheckBox v-model="isDropship" label="Send as Dropshipper" />
 			</div>
 			<div class="delivery-details__form-right">
-				<Form ref="dropship" :model="modelDropShip" :rules="rulesDropShip">
-					<FormItem prop="dropshipName">
-						<Input id="dropshipName" label="Dropshipper Name" v-model="modelDropShip.dropshipName" :disabled="!isDropship"/>
+				<Form ref="dropship" :model="dropShip" :rules="rulesDropShip">
+					<FormItem prop="name">
+						<Input id="dropshipName" label="Dropshipper Name" v-model="dropShip.name" :disabled="!isDropship"/>
 					</FormItem>
-					<FormItem prop="dropshipPhone">
-						<Input id="dropShipPhone" label="Dropshipper Phone Number" v-model="modelDropShip.dropshipPhone" :disabled="!isDropship"/>
+					<FormItem prop="phone">
+						<Input id="dropShipPhone" label="Dropshipper Phone Number" v-model="dropShip.phone" :disabled="!isDropship"/>
 					</FormItem>
 				</Form>
 			</div>
@@ -46,30 +46,37 @@ import TextArea from '@/components/text-area'
 import Cookies from 'js-cookie'
 
 export default {
+	props: {
+		currentDetail: {
+			default: null
+		}
+	},
 	data() {
-		let cookies = Cookies.get('payment')
-
-		let payload = JSON.parse(cookies).form1 ? JSON.parse(cookies).form1 : {}
-		let { email, address, phone, dropshipName, dropshipPhone } = payload.payload || {}
 		let PhoneRegex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-/,/0-9]*$/g
 
 		return {
-			isDropship: dropshipName !== undefined ,
-			payload,
+			isDropship: false ,
+			test: {
+				name: 'asdasdasd'
+			},
 			model: {
-				email,
-				phone,
-				address
+				email: '',
+				phone: '',
+				address: ''
+			},
+			dropShip: {
+				name: '',
+				phone: ''
 			},
 			modelDropShip: {
-				dropshipName,
-				dropshipPhone
+				dropshipName: '',
+				dropshipPhone: ''
 			},
 			rulesDropShip: {
-				dropshipName: [
+				name: [
 					{ required: false, trigger: 'change' }
 				],
-				dropshipPhone: [
+				phone: [
 					{ required: false, trigger: 'change' },
 					{ pattern : PhoneRegex, trigger: 'change'},
 					{ min: 6, max: 20, trigger: 'change'}
@@ -94,10 +101,13 @@ export default {
 	},
 	watch: {
 		isDropship(val) {
-			this.modelDropShip.dropshipName = ''
-			this.modelDropShip.dropShipPhone = ''
-			this.rulesDropShip.dropshipName[0].required = val
-			this.rulesDropShip.dropshipPhone[0].required = val
+			if( !val ) {
+				this.dropShip.name = ''
+				this.dropShip.phone = ''
+			}
+			this.rulesDropShip.name[0].required = val
+			this.rulesDropShip.phone[0].required = val
+			this.dispatchForm()
 		}
 	},
 	components: {
@@ -114,15 +124,14 @@ export default {
 				email: this.model.email,
 				phone: this.model.phone,
 				address: this.model.address,
-				dropshipName: this.modelDropShip.dropshipName,
-				dropshipPhone: this.modelDropShip.dropshipPhone
+				isDropship: this.isDropship,
+				dropshipName: this.dropShip.name,
+				dropshipPhone: this.dropShip.phone
 			}
-			this.$store.dispatch('payment/setFirstForm', payload)
 			let payment = JSON.parse(Cookies.get('payment'))
-			payment.form1 = {
-				payload
-			}
+			payment.form1 = payload
 			Cookies.set('payment', payment)
+			this.$store.dispatch('payment/setCurrentDetail', payment)
 		},
 		validate() {
 			let form1, form2
@@ -140,10 +149,22 @@ export default {
 		onSubmit() {
 			this.dispatchForm()
 			return this.validate()
+		},
+		prepopulate() {
+			this.model.email = this.currentDetail.email
+			this.model.phone = this.currentDetail.phone
+			this.model.address = this.currentDetail.address
+
+			this.isDropship = this.currentDetail.isDropship
+
+			this.dropShip.name = this.currentDetail.dropshipName
+			this.dropShip.phone = this.currentDetail.dropshipPhone
+			
 		}
 	},
 	mounted() {
-		if(this.payload.payload){
+		if( this.currentDetail ){
+			this.prepopulate()
 			this.validate()
 		}
 	}
