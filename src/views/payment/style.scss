@@ -6,13 +6,14 @@
     background-color: $primary;
     &__stepper-section {
         width: fit-content;
-        position: fixed;
-        top: 0;
+        position: absolute;
+        top: -44px;
         left: 0;
         right: 0;
         margin: auto;
     }
     &__box {
+        position: relative;
         display: flex;
         background-color: $white;
         width: fit-content;
@@ -35,5 +36,6 @@
     }
     &__summary-section {
         margin-left: auto;
+        min-height: 500px;
     }
 }

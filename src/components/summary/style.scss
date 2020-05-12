@@ -1,6 +1,8 @@
 .summary {
     $self: &;
     width: 300px;
+    position: relative;
+    height: 100%;
     &__divider {
         width: 80px;
         height: 1px;
@@ -9,7 +11,10 @@
         margin-top: 30px;
     }
     &__bottom {
-        margin-top: 109px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
     }
     &__item {
         display: flex;
