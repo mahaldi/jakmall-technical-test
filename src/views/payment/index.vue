@@ -104,8 +104,10 @@ export default {
     dispatchStep(direction) {
       let step = this.currentStep
       direction === 'next' ? step += 1 : step -= 1
-      this.$store.dispatch('payment/setStep', step )
-      this.replaceQuery(step)
+      if(step > 0) {
+        this.$store.dispatch('payment/setStep', step )
+        this.replaceQuery(step)
+      }
     },
     replaceQuery(step) {
       this.$router.replace({ query: {...this.$route.query, step }}).catch(() => {})
