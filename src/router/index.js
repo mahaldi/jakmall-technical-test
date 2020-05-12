@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Payment from '../views/payment'
 
 Vue.use(VueRouter)
+function lazyLoad(view){
+  return() => import(`@/views/${view}`)
+}
 
   const routes = [
   {
@@ -17,12 +19,12 @@ Vue.use(VueRouter)
   {
     path: '/payment',
     name: 'Payment',
-    component: Payment
+    component: lazyLoad('payment')
   },
   {
     path: '/payment/:id',
     name: 'Payment',
-    component: Payment
+    component: lazyLoad('payment')
   }
 ]
 
