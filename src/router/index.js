@@ -25,6 +25,11 @@ function lazyLoad(view){
     path: '/payment/:id',
     name: 'Payment',
     component: lazyLoad('payment')
+  },
+  {
+    path: '/cart',
+    name: 'Cart',
+    component: lazyLoad('cart')
   }
 ]
 
