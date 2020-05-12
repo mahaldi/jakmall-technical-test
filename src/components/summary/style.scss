@@ -3,6 +3,10 @@
     width: 300px;
     position: relative;
     height: 100%;
+    @include mq-medium {
+        width: 100%;
+        padding: 16px;
+    }
     &__divider {
         width: 80px;
         height: 1px;
@@ -11,6 +15,11 @@
         margin-top: 30px;
     }
     &__bottom {
+        @include mq-medium {
+            width: calc(100% - 32px);
+            left: 16px;
+            bottom: 16px;
+        }
         position: absolute;
         left: 0;
         bottom: 0;
