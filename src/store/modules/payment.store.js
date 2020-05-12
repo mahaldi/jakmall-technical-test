@@ -28,6 +28,9 @@ const actions = {
 	},
 	fetchCurrentDetail({commit}) {
 		let data = Cookies.get('payment')
+		let payments = Cookies.get('payments')
+		if( !payments ) Cookies.set('payments', [], { expires: 1 });
+		
 		if( !data ) {
 			Cookies.set('payment', {}, { expires: 1 });
 			commit('SET_CURRENTDETAIL', {})
