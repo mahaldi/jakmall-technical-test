@@ -11,6 +11,16 @@
         left: 0;
         right: 0;
         margin: auto;
+        @include mq-medium {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 99;
+            background-color: $primary;
+        }
     }
     &__box {
         position: relative;
@@ -23,10 +33,20 @@
         height: fit-content;
         min-height: 550px;
         box-shadow: 2px 10px 20px 0px $secondaryOpt10;
+        @include mq-medium {
+            min-width: auto;
+            width: 100%;
+            display: block;
+            padding-left: 16px;
+            padding-right: 16px;
+        }
     }
     &__form-section {
         width: 100%;
         position: relative;
+        @include mq-small-only {
+            padding-bottom: 92px;
+        }
     }
     &__divider {
         margin-top: auto;
@@ -35,9 +55,24 @@
         height: 460px;
         margin-left: 29px;
         margin-right: 17px;
+        @include mq-medium {
+            display: none;
+        }
     }
     &__summary-section {
         margin-left: auto;
         min-height: 500px;
+        @include mq-medium {
+            display: none;
+        }
+    }
+    &__confirm-button {
+        width: 100%;
+        position: fixed;
+        z-index: 99;
+        bottom: 0;
+        left: 0;
+        padding: 16px;
+        background-color: $primary;
     }
 }

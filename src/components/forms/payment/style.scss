@@ -9,9 +9,16 @@
 	}
 	&__category-items {
 		display: flex;
+		@include mq-medium {
+			display: block;
+		}
 	}
 	&__category-item {
 		margin-right: 10px;
+		@include mq-medium {
+			margin-right: 0;
+			margin-bottom: 8px;
+		}
 		&:nth-last-child(1) {
 			margin-right: 0;
 		}
@@ -27,6 +34,10 @@
 	border: 1px solid $light-grey;
 	background-color: $white;
 	position: relative;
+	@include mq-medium {
+		min-width: auto;
+		width: 100%;
+	}
 	&--active {
 		border-color: $success;
 		background-color: $successOpt10;

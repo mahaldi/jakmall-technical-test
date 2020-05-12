@@ -21,6 +21,9 @@
           :dropShip="dropShip"
           :confirmBtnText="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
 			</div>
+      <div class="payment__confirm-button is-medium">
+        <ConfirmButton @click="onSubmit" :label="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +35,7 @@ import PaymentForm from '@/components/forms/payment'
 import BackFormButton from '@/components/buttons/back-form'
 import FormFinish from '@/components/forms/finish'
 import Cookies from 'js-cookie'
+import ConfirmButton from '@/components/buttons/confirm-form'
 
 export default {
   name: "Payment",
@@ -41,7 +45,8 @@ export default {
     DeliveryDetails,
     PaymentForm,
     BackFormButton,
-    FormFinish
+    FormFinish,
+    ConfirmButton
   },
   data() {
     return {

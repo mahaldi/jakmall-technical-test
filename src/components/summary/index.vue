@@ -45,12 +45,17 @@
         <span class="summary__total-text heading">Total</span>
         <span class="summary__total-cost heading">{{ total }}</span>
       </div>
-      <button v-if="currentStep < 3" class="summary__button" @click="$emit('submit')">{{ confirmBtnText }}</button>
+      <ConfirmButton v-if="currentStep < 3"  @click="$emit('submit')" :label="confirmBtnText"/>
     </div>
   </div>
 </template>
 <script>
+import ConfirmButton from '@/components/buttons/confirm-form'
+
 export default {
+  components: {
+    ConfirmButton
+  },
   props: {
     confirmBtnText: {
       default: 'Continue to Payment'

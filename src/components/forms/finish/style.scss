@@ -15,4 +15,10 @@
 		margin-top: 28px;
 		margin-bottom: 63px;
 	}
+	@include mq-medium {
+		position: relative;
+	}
+	@include mq-small-only {
+		width: 100%;
+	}
 }

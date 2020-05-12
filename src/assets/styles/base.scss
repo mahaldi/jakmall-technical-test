@@ -1,3 +1,16 @@
+.is-medium {
+	display: none;
+	@include mq-medium{
+		display: block;
+	}
+}
+.is-mobile {
+	display: none;
+	@include mq-small-only {
+		display: block;
+	}
+}
+
 .heading {
 	$self: &;
 	font-size: 24px;
@@ -7,6 +20,12 @@
 	margin-bottom: 16.5px;
 	&--large{
 		font-size: 36px;
+		@include mq-medium {
+			font-size: 32px;
+		}
+		@include mq-small-only {
+			font-size: 26px;
+		}
 	}
 	&--mgb-23{
 		margin-bottom: 23px;
