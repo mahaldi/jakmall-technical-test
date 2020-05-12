@@ -7,6 +7,7 @@
       <div class="stepper__text jakmall-text jakmall-text--ft16 jakmall-text--medium jakmall-text--secondary jakmall-text--mg0">
         {{ item.text }}
       </div>
+			<i class="stepper__icon icon-right-open"></i>
     </div>
   </div>
 </template>
