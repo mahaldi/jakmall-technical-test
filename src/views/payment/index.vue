@@ -55,10 +55,6 @@ export default {
       val === 3 ? this.backBtnText = 'Go to homepage' : 
       this.backBtnText = defaultText
     },
-    // '$route.query'() {
-    //   console.log('masuk query')
-    //   this.$store.dispatch('payment/fetchCurrentDetail')
-    // }
   },
   computed: {
     currentDetail() {
