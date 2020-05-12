@@ -26,8 +26,10 @@
     }
     &__form-section {
         width: 100%;
+        position: relative;
     }
     &__divider {
+        margin-top: auto;
         width: 1px;
         background-color: $secondaryOpt20;
         height: 460px;

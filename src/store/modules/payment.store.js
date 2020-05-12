@@ -18,9 +18,13 @@ const getters = {
 // Actions 
 const actions = {
 	fetchDetails({ commit }, id) {
-		let data = Cookies.get('payments')
-		if( !data ) Cookies.set('payments', [], { expires: 1 });
-		commit('SET_DETAILS', data[id])
+		let data = JSON.parse(Cookies.get('payments'))
+		for(let i = 0 ; i < data.length; i++){
+			if(data[i].id === id) {
+				commit('SET_CURRENTDETAIL', data[i])
+			}
+		}
+		
 	},
 	fetchCurrentDetail({commit}) {
 		let data = Cookies.get('payment')

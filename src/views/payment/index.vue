@@ -5,11 +5,11 @@
 				<Stepper :step="currentStep" />
 			</div>
 			<div class="payment__form-section">
-        <BackFormButton @click="dispatchStep('prev')" :text="backBtnText"/>
+        <BackFormButton v-if="currentStep < 3" @click="dispatchStep('prev')" :text="backBtnText"/>
         <DeliveryDetails v-if="currentStep === 1" ref="form1" :currentDetail="currentDetail && currentDetail.form1" />
         <PaymentForm v-else-if="currentStep === 2" ref="form2" 
           :currentDetail="currentDetail && currentDetail.form2 || {}"/>
-        <FormFinish v-else-if="currentStep === 3"/>
+        <FormFinish v-else-if="currentStep === 3" :currentDetail="currentDetail.form2"/>
 			</div>
       <div class="payment__divider"></div>
 			<div class="payment__summary-section">
@@ -31,6 +31,7 @@ import DeliveryDetails from '@/components/forms/delivery-details'
 import PaymentForm from '@/components/forms/payment'
 import BackFormButton from '@/components/buttons/back-form'
 import FormFinish from '@/components/forms/finish'
+import Cookies from 'js-cookie'
 
 export default {
   name: "Payment",
@@ -53,7 +54,11 @@ export default {
       val === 2 ? this.backBtnText = 'Back to delivery' : 
       val === 3 ? this.backBtnText = 'Go to homepage' : 
       this.backBtnText = defaultText
-    }
+    },
+    // '$route.query'() {
+    //   console.log('masuk query')
+    //   this.$store.dispatch('payment/fetchCurrentDetail')
+    // }
   },
   computed: {
     currentDetail() {
@@ -76,6 +81,14 @@ export default {
     }
   },
   methods: {
+		generateOrderId() {
+			var charset = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+			let code =''
+			for (var i = 0; i < 5; i++)
+				code += charset.charAt(Math.floor(Math.random() * charset.length));
+			
+			return code;
+		},
     dispatchStep(direction) {
       let step = this.currentStep
       direction === 'next' ? step += 1 : step -= 1
@@ -90,21 +103,35 @@ export default {
 
       if(isValid) {
         this.dispatchStep('next')
+        if( this.currentStep === 3 ) {
+          let cookiePayments = Cookies.get('payments')
+          if( !cookiePayments ) Cookies.set('payments', [])
+          let dataPayments = JSON.parse(cookiePayments)
+          let payload = this.currentDetail
+          let orderId = this.generateOrderId()
+          payload.id = orderId
+          dataPayments.push(payload)
+          Cookies.set( 'payments', dataPayments)
+          Cookies.remove('payment')
+          this.$router.replace({ path: '/payment/' + orderId }).catch(() => {})
+          return
+        }
         this.replaceQuery(this.currentStep)
       }
     }
   },
   beforeMount() {
+
+    let { id } = this.$route.params
+    if(id){
+      this.$store.dispatch('payment/setStep', 3)
+      return this.$store.dispatch('payment/fetchDetails', id)
+    }
     let step = parseInt(this.$route.query.step)
     this.$store.dispatch('payment/fetchCurrentDetail')
     if(step > 1 && !this.currentDetail.form2)
       return this.replaceQuery(1)
     this.$store.dispatch('payment/setStep', step)
-  },
-  mounted() {
-    let { id } = this.$route.params
-    if(id)
-      return this.$store.dispatch('payment/fetchDetails', id)
   }
 };
 </script>

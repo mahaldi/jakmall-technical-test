@@ -20,6 +20,7 @@ export default {
 		display: flex;
 		cursor: pointer;
 		margin-bottom: 33px;
+		width: fit-content;
     &__icon {
 			color: $blackOpt60;
 			margin-right: 11px;

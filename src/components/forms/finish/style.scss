@@ -1,11 +1,14 @@
 .payment-finish {
 	$self: &;
-	width: 100%;
-	text-align: center;
-  &__heading {
-
-	}
-	&__content {
-
+	width: 400px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+	bottom: 0;
+	height: fit-content;
+	&__back {
+		text-decoration: none;
 	}
 }

@@ -2,7 +2,7 @@
 	<div class="category-button" :class="{'category-button--active' : isActive}" @click="$emit('click')">
 		<div class="category-button__content">
 			<p class="jakmall-text jakmall-text--medium jakmall-text--blackOpt60 jakmall-text--ft-13 jakmall-text--mgb-5" 
-				:class="{'jakmall-text--blackOpt80' : isActive}"> {{ firstText }} 
+				:class="{'jakmall-text--blackOpt80' : isActive}" :style="!secondText ? 'line-height: 30px;':''"> {{ firstText }} 
 			</p>
 			<p class="jakmall-text jakmall-text--bold jakmall-text--bluis-blackOpt60 jakmall-text--ft16 jakmall-text--mg0" 
 				:class="{'jakmall-text--bluis-black' : isActive}"> {{ secondText }} 

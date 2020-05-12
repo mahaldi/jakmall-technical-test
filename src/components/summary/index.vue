@@ -45,7 +45,7 @@
         <span class="summary__total-text heading">Total</span>
         <span class="summary__total-cost heading">{{ total }}</span>
       </div>
-      <button class="summary__button" @click="$emit('submit')">{{ confirmBtnText }}</button>
+      <button v-if="currentStep < 3" class="summary__button" @click="$emit('submit')">{{ confirmBtnText }}</button>
     </div>
   </div>
 </template>

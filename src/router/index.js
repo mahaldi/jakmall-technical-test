@@ -18,6 +18,11 @@ Vue.use(VueRouter)
     path: '/payment',
     name: 'Payment',
     component: Payment
+  },
+  {
+    path: '/payment/:id',
+    name: 'Payment',
+    component: Payment
   }
 ]
 
