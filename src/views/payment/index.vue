@@ -1,31 +1,29 @@
 <template>
-  <div class="payment">
-    <div class="payment__box">
-			<div class="payment__stepper-section">
-				<Stepper :step="currentStep" />
-			</div>
-			<div class="payment__form-section">
+  <Wrapper>
+      <div class="payment__stepper-section">
+        <Stepper :step="currentStep" />
+      </div>
+      <div class="payment__form-section">
         <BackFormButton v-if="currentStep < 3" @click="dispatchStep('prev')" :text="backBtnText"/>
         <DeliveryDetails v-if="currentStep === 1" ref="form1" :currentDetail="currentDetail && currentDetail.form1" />
         <PaymentForm v-else-if="currentStep === 2" ref="form2" 
           :currentDetail="currentDetail && currentDetail.form2 || {}"/>
         <FormFinish v-else-if="currentStep === 3" :currentDetail="currentDetail.form2"/>
-			</div>
+      </div>
       <div class="payment__divider"></div>
-			<div class="payment__summary-section">
-				<PaymentSummary @submit="onSubmit" 
+      <div class="payment__summary-section">
+        <PaymentSummary @submit="onSubmit" 
           :currentDetail="currentDetail"
           :currentStep="currentStep"
           :shipment="shipment"
           :payment="payment"
           :dropShip="dropShip"
           :confirmBtnText="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
-			</div>
+      </div>
       <div class="payment__confirm-button is-medium">
         <ConfirmButton @click="onSubmit" v-if="currentStep < 3" :label="currentStep === 1 ? 'Continue to Payment': `Pay with ${payment.firstText}`"/>
         <ConfirmButton @click="summaryDrawer = true" v-if="currentStep === 3" label="Check Summary"/>
       </div>
-    </div>
     <Drawer :visible.sync="summaryDrawer" title="Summary" :size="450" sizeUnit="px">
       <PaymentSummary 
         :currentDetail="currentDetail"
@@ -34,7 +32,7 @@
         :payment="payment"
         :dropShip="dropShip"/>
     </Drawer>
-  </div>
+  </Wrapper>
 </template>
 <script>
 const PaymentSummary = () => import('@/components/summary')
@@ -45,6 +43,7 @@ const BackFormButton = () => import('@/components/buttons/back-form')
 const FormFinish = () => import('@/components/forms/finish')
 const ConfirmButton = () => import('@/components/buttons/confirm-form')
 const Drawer = () => import('@/components/drawer')
+const Wrapper = () => import('@/components/wrapper-page')
 import Cookies from 'js-cookie'
 export default {
   name: "Payment",
@@ -56,7 +55,8 @@ export default {
     PaymentForm,
     BackFormButton,
     FormFinish,
-    ConfirmButton
+    ConfirmButton,
+    Wrapper
   },
   data() {
     return {
