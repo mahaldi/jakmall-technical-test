@@ -104,6 +104,8 @@ export default {
       if(step > 0) {
         this.$store.dispatch('payment/setStep', step )
         this.replaceQuery(step)
+      } else {
+        window.location.replace('/cart')
       }
     },
     replaceQuery(step) {
@@ -111,7 +113,7 @@ export default {
     },
     onSubmit() {
       let isValid = this.$refs[`form${this.currentStep}`].onSubmit()
-      
+
       if(isValid) {
         this.dispatchStep('next')
         if( this.currentStep === 3 ) {
