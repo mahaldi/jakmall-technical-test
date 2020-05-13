@@ -10,7 +10,7 @@
         </div>
         <div class="card-cart__counter">
             <div class="card-cart__counter-btn" @click="counter('min')">-</div>
-            <input class="card-cart__counter-input" v-model="qty" type="text"/>
+            <div class="card-cart__counter-input"> {{ qty }} </div>
             <div class="card-cart__counter-btn" @click="counter('add')">+</div>
         </div>
     </div>
