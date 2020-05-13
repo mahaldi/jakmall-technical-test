@@ -1,6 +1,16 @@
+.jakmall-wrapper {
+    $self: &;
+    &--cart {
+        .jakmall-wrapper__box {
+            display: block !important;
+
+        }
+    }
+}
 .cart{
     $self: &;
     &__heading {
+        height: fit-content;
         margin-bottom: 24px;
     }
     &__button {

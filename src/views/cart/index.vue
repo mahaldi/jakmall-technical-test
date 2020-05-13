@@ -1,5 +1,5 @@
 <template>
-    <Wrapper>
+    <Wrapper modifierClass="cart">
         <div class="cart__heading">
             <Heading heading="Cart"/>
         </div>
@@ -52,4 +52,4 @@ export default {
     }
 }
 </script>
-<style lang="scss" src="./style.scss" scoped />
+<style lang="scss" src="./style.scss" />
