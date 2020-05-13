@@ -1,0 +1,98 @@
+.is-medium {
+	display: none;
+	@include mq-medium{
+		display: block;
+	}
+}
+.is-mobile {
+	display: none;
+	@include mq-small-only {
+		display: block;
+	}
+}
+
+.heading {
+	$self: &;
+	font-size: 24px;
+	font-weight: bold;
+	color: $secondary;
+	font-family: 'Montserrat', sans-serif;
+	margin-bottom: 16.5px;
+	&--large{
+		font-size: 36px;
+		@include mq-medium {
+			font-size: 32px;
+		}
+		@include mq-small-only {
+			font-size: 26px;
+		}
+	}
+	&--mgb-23{
+		margin-bottom: 23px;
+	}
+}
+.jakmall-text {
+	$self: &;
+	font-size: 14px;
+	color: $black;
+	font-weight: 400;
+	margin-bottom: 10px;
+	font-family: 'Inter', sans-serif;
+	//weight
+	&--bold {
+		font-weight: bold;
+	}
+	&--medium {
+		font-weight: 500;
+	}
+	//
+	//font-size
+	&--ft13 {
+		font-size: 13px;
+	}
+	&--ft16 {
+		font-size: 16px;
+	}
+	&--ft-24 {
+		font-size: 24px;
+	}
+	//
+	//color
+	&--success {
+		color: $success;
+	}
+	&--secondary {
+		color: $secondary;
+	}
+	&--white {
+		color: $white;
+	}
+	&--bluis-blackOpt80 {
+		color: $bluis-blackOpt80;
+	}
+	&--bluis-blackOpt60 {
+		color: $bluis-blackOpt60;
+	}
+	&--blackOpt60 {
+		color: $blackOpt60;
+	}
+	&--bluis-black {
+		color: $bluis-black;
+	}
+	//
+	// opacity
+	&--opt6 {
+		opacity: 0.6;
+	}
+	//
+	// margin bottom
+	&--mgb-2{
+		margin-bottom: 2px;
+	}
+	&--mgb-5 {
+		margin-bottom: 5px;
+	}
+	&--mg0 {
+		margin: 0;
+	}
+}

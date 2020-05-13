@@ -1,0 +1,121 @@
+
+.jakmall-input {
+	$self: &;
+	&__element, &__label{
+		padding: 21px 35px 9px 15px;
+		width: 100%;
+		font-size: 16px;
+	}
+	&__element {
+		border: 1px solid $light-grey;
+		border-radius: 0;
+		outline: none;
+		transition: 0.2s ease-in-out;
+		font-weight: bold;
+		height: 62px;
+		color: $bluis-black;
+		&:disabled{
+			background-color: $white;
+			color: $light-grey;
+			cursor: not-allowed;
+		}
+		&:focus + label{
+			font-size: 13px;
+			color: $light-grey ;
+		}
+		&:disabled + label {
+			color: $light-grey;
+			cursor: not-allowed;
+		}
+		&:focus + label, &:valid + label {
+			width: auto;
+			height: 1.3em;
+			padding: 0px;
+			margin: 0px;
+			background: $white;
+			transition: 0.2s ease-in-out;
+			top: 12px;
+			left: 15px;
+		}
+		&:not(:focus) + label {
+			transition: 0.2s ease-in-out;
+		}
+		&:focus + label{
+			color: $light-grey ;
+		}
+		&:disabled + label {
+			color: $light-grey;
+			cursor: not-allowed;
+		}
+		&:focus + label, &:valid + label {
+			font-size: 12px;
+			width: auto;
+			height: 1.3em;
+			padding: 0px;
+			margin: 0px;
+			background: $white;
+			transition: 0.2s ease-in-out;
+			top: 12px;
+			left: 15px;
+		}
+		&:not(:focus) + label {
+			transition: 0.2s ease-in-out;
+		}
+	}
+	&__label {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		color: $light-grey;
+		cursor: text;
+	}
+	&__icon {
+		position: absolute;
+		top: 24px;
+		right: 12px;
+		font-size: 14px;
+		transition: 0.2s ease-in-out;
+		display: none;
+		cursor: pointer;
+	}
+	&__formfield {
+		position: relative;
+		box-sizing: border-box;
+		margin: auto;
+		padding: 0px;
+		border: 0px;
+		font-size: 16px;
+		width: 100%;
+	}
+	&--error {
+		& > input {
+			border: 1px solid $secondary;
+			&:focus + label, &:valid + label {
+				color: $secondary;
+			}
+		}
+		& > i {
+			display: block;
+			color: $secondary;
+		}
+		& > label {
+			color: $secondary;
+		}
+	}
+	&--success {
+		& > input {
+			border: 1px solid $success;
+			&:focus + label, &:valid + label {
+				color: $success;
+			}
+		}
+		& > i {
+			display: block;
+			color: $success;
+		}
+		& > label {
+			color: $success;
+		}
+	}
+}

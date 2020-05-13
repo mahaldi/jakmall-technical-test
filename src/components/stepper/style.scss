@@ -1,0 +1,52 @@
+.stepper{
+	$self: &;
+	display: flex;
+	padding: 29px 37px;
+	background-color: $primary;
+	border-radius: 50px;
+	@include mq-medium {
+		border-radius: 0;
+		padding: 15px;
+		width: fit-content;
+		margin: auto;
+	}
+	&__step {
+		margin-right: 67px;
+		position: relative;
+		@include mq-medium {
+			margin-right: 60px;
+		}
+		display: flex;
+		&:nth-last-child(1) {
+			margin-right: 0;
+			i {
+				display: none;
+			}
+		}
+	}
+	&__rounded {
+		width: 30px;
+		height: 30px;
+		border-radius: 100%;
+		background-color: $secondaryOpt20;
+		text-align: center;
+		line-height: 30px;
+		&--active {
+			background-color: $secondary;
+			color: $white;
+		}
+	}
+	&__text {
+		@include mq-small-only {
+			display: none;
+		}
+		margin-left: 11px;
+		line-height: 30px;
+	}
+	&__icon {
+		line-height: 30px;
+		position: absolute;
+		right: -36px;
+		color: $secondary;
+	}
+}

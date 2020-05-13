@@ -1,0 +1,65 @@
+.card-cart {
+    $self: &;
+    display: flex;
+    height: fit-content;
+    position: relative;
+    width: 431px;
+    @include mq-small-only {
+        width: 100%;
+    }
+    &__image {
+        width: 100px;
+        height: fit-content;
+        margin-right: 24px;
+        @include mq-small-only {
+            margin-right: 8px;
+        }
+    }
+    &__image-element {
+        width: 100%;
+    }
+    &__info {
+        margin: 0;
+        height: fit-content;
+        width: 200px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate( -50%, -50%);
+        @include mq-small-only {
+            transform: none;
+            position: relative;
+            top: auto;
+            left: auto;
+        }
+    }
+    &__counter {
+        display: flex;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        left: 86%;
+        transform: translate( -50%, -50%);
+        @include mq-small-only {
+            top: 92%;
+            left: 51%;
+            transform: translate( -50%, -37%);
+        }
+    }
+    &__counter-btn {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        border-radius: 100%;
+        background-color: $secondary;
+        font-weight: bold;
+        color: $white;
+    }
+    &__counter-input {
+        text-align: center;
+        width: 30px;
+        margin: 0 16px;
+        border: 1px solid $light-grey;
+    }
+}

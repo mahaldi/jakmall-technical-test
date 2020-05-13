@@ -1,0 +1,22 @@
+.payment-heading {
+	$self: &;
+	position: relative;
+	width: 300px;
+	text-align: left;
+	@include mq-medium {
+		width: 100%;
+	}
+	&__tag {
+		position: relative;
+		z-index: 2;
+	}
+	&__shadow {
+		height: 8px;
+		width: 100%;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		z-index: 1;
+		background-color: $lightest-grey;
+	}
+}

@@ -1,0 +1,26 @@
+.jakmall-wrapper {
+    $self: &;
+    &--cart {
+        .jakmall-wrapper__box {
+            display: block !important;
+
+        }
+    }
+}
+.cart{
+    $self: &;
+    &__heading {
+        height: fit-content;
+        margin-bottom: 24px;
+    }
+    &__button {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 99;
+        padding: 16px;
+        background-color: $white;
+        border-top: 1px solid $light-grey;
+    }
+}

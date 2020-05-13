@@ -1,0 +1,55 @@
+.payment{
+    $self: &;
+    &__stepper-section {
+        width: fit-content;
+        position: absolute;
+        top: -44px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        @include mq-medium {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 99;
+            background-color: $primary;
+        }
+    }
+    &__form-section {
+        width: 100%;
+        position: relative;
+        @include mq-small-only {
+            padding-bottom: 92px;
+        }
+    }
+    &__divider {
+        margin-top: auto;
+        width: 1px;
+        background-color: $secondaryOpt20;
+        height: 460px;
+        margin-left: 29px;
+        margin-right: 17px;
+        @include mq-medium {
+            display: none;
+        }
+    }
+    &__summary-section {
+        margin-left: auto;
+        min-height: 500px;
+        @include mq-medium {
+            display: none;
+        }
+    }
+    &__confirm-button {
+        width: 100%;
+        position: fixed;
+        z-index: 99;
+        bottom: 0;
+        left: 0;
+        padding: 16px;
+        background-color: $primary;
+    }
+}

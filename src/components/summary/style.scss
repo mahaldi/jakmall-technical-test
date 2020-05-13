@@ -1,0 +1,62 @@
+.summary {
+    $self: &;
+    width: 300px;
+    position: relative;
+    height: 100%;
+    @include mq-medium {
+        width: 100%;
+        padding: 16px;
+    }
+    &__divider {
+        width: 80px;
+        height: 1px;
+        background-color: $grey;
+        margin-bottom: 14px;
+        margin-top: 30px;
+    }
+    &__bottom {
+        @include mq-medium {
+            width: calc(100% - 32px);
+            left: 16px;
+            bottom: 16px;
+        }
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+    &__item {
+        display: flex;
+        margin-bottom: 15px;
+        &:nth-last-child(1){
+            margin-bottom: 0;
+        }
+    }
+    &__item-name, &__item-cost {
+        width: 50%;
+    }
+    &__item-cost {
+        text-align: right;
+    }
+    &__total {
+        display: flex;
+        margin-top: 16.5px;
+    }
+    &__total-text, &__total-cost {
+        width: 50%;
+    }
+    &__total-cost {
+        text-align: right;
+    }
+    &__button {
+        outline: none;
+        cursor: pointer;
+        height: 60px;
+        color: $white;
+        background-color: $secondary;
+        width: 100%;
+        font-size: 18px;
+        font-weight: 500;
+        box-shadow: 3px 5px 10px 0px $secondaryOpt20;
+    }
+}
