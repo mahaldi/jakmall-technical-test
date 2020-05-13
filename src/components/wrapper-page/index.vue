@@ -1,10 +1,20 @@
 <template>
-    <div class="jakmall-wrapper">
+    <div :class="`jakmall-wrapper jakmall-wrapper--${modifierClass}`">
         <div class="jakmall-wrapper__box">
             <slot></slot>
         </div>
     </div>
 </template>
+<script>
+export default {
+    props: {
+        modifierClass: {
+            type: String,
+            default: ''
+        }
+    }
+}
+</script>
 <style lang="scss" scoped>
 .jakmall-wrapper {
     $self: &;
